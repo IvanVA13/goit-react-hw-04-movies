@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import SearchForm from '../components/SearchForm';
 import MovieList from '../components/MovieList';
 import api from '../services/api';
+import routes from '../routes';
 
 class MoviesPage extends Component {
   state = {
@@ -41,9 +42,9 @@ class MoviesPage extends Component {
       <>
         <SearchForm onSubmit={this.submitHandler} />
         <Route
-          path="/movies"
+          path={routes.movies}
           render={props => {
-            return <MovieList {...props} movies={this.state.movies} />;
+            return <MovieList movies={this.state.movies} />;
           }}
         />
       </>

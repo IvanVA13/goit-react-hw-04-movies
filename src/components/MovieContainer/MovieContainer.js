@@ -3,6 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from '../../routes';
 import styles from './MovieContainer.module.scss';
+import defaultImg from '../../img/default.jpg';
 
 class MovieContainer extends Component {
   handleGoBack = () => {
@@ -22,8 +23,9 @@ class MovieContainer extends Component {
           <div className={styles['movie-image-container']}>
             <img
               src={
-                poster_path &&
-                `https://image.tmdb.org/t/p/original${poster_path}`
+                poster_path
+                  ? `https://image.tmdb.org/t/p/original${poster_path}`
+                  : defaultImg
               }
               alt={original_title}
             />
@@ -77,9 +79,13 @@ class MovieContainer extends Component {
   }
 }
 
+MovieContainer.defaultProps = {
+  poster_path: '',
+};
+
 MovieContainer.propTypes = {
   movie: PropTypes.shape({
-    poster_path: PropTypes.string.isRequired,
+    poster_path: PropTypes.string,
     original_title: PropTypes.string.isRequired,
     vote_average: PropTypes.number.isRequired,
     overview: PropTypes.string.isRequired,

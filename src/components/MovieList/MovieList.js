@@ -1,26 +1,27 @@
 import { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import routes from '../../routes';
+import PropTypes from 'prop-types';
 
-// import PropTypes from 'prop-types';
+import routes from '../../routes';
 // import styles from './MovieList.module.scss';
 
 class MovieList extends Component {
   render() {
+    const { movies, location } = this.props;
     return (
-      this.props.movies.length > 0 && (
+      movies.length > 0 && (
         <ul>
-          {this.props.movies.map(movie => (
-            <li key={movie.id}>
+          {movies.map(({ id, title }) => (
+            <li key={id}>
               <NavLink
                 to={{
-                  pathname: `${routes.movies}/${movie.id}`,
+                  pathname: `${routes.movies}/${id}`,
                   state: {
-                    from: this.props.location,
+                    from: location,
                   },
                 }}
               >
-                {movie.title}
+                {title}
               </NavLink>
             </li>
           ))}
@@ -30,8 +31,13 @@ class MovieList extends Component {
   }
 }
 
-// MovieList.propTypes = {
-//   example: PropTypes.string.isRequired,
-// };
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default withRouter(MovieList);

@@ -1,6 +1,6 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
-// import PropTypes from 'prop-types';
 // import styles from './SearchForm.module.scss';
 
 class SearchForm extends Component {
@@ -41,8 +41,8 @@ class SearchForm extends Component {
   }
 }
 
-// SearchForm.propTypes = {
-//   example: PropTypes.string.isRequired,
-// };
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default SearchForm;
