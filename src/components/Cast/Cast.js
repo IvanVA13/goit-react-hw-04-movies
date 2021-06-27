@@ -1,18 +1,21 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from './Cast.module.scss';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+
 import defaultImg from '../../img/default.jpg';
 
 class Cast extends Component {
   render() {
     const { cast } = this.props;
     return (
-      <ul>
+      <Row xs={1} md={4} lg={5}>
         {cast.length > 0
           ? cast.map(({ character, name, id, profile_path }) => (
-              <li key={id}>
-                <div className={styles['img-container']}>
-                  <img
+              <Col>
+                <Card key={id}>
+                  <Card.Img
                     src={
                       profile_path
                         ? `https://image.tmdb.org/t/p/original${profile_path}`
@@ -20,13 +23,15 @@ class Cast extends Component {
                     }
                     alt={name}
                   />
-                </div>
-                <p>{name}</p>
-                <p>Character: {character}</p>
-              </li>
+                  <Card.Body>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Text>Character: {character}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
             ))
           : 'We don`t have any cast for this movie'}
-      </ul>
+      </Row>
     );
   }
 }

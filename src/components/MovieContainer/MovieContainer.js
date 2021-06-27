@@ -16,63 +16,71 @@ class MovieContainer extends Component {
 
     return (
       <>
-        <button type="button" onClick={this.handleGoBack}>
+        <button
+          class="btn btn-warning"
+          type="button"
+          onClick={this.handleGoBack}
+        >
           Go back
         </button>
-        <div className={styles['movie-container']}>
-          <div className={styles['movie-image-container']}>
-            <img
-              src={
-                poster_path
-                  ? `https://image.tmdb.org/t/p/original${poster_path}`
-                  : defaultImg
-              }
-              alt={original_title}
-            />
+        <div className="card bg-light mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/original${poster_path}`
+                    : defaultImg
+                }
+                alt={original_title}
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h1 className="card-title">{original_title}</h1>
+                <p className="card-text">User score {vote_average * 10}%</p>
+                <h2 className="card-title">Overview</h2>
+                <p className="card-text">{overview}</p>
+                <h2 className="card-title">Genres</h2>
+                <p className="card-text">
+                  {genres && genres.map(genre => genre.name).join(' ')}
+                </p>
+              </div>
+            </div>
           </div>
-          <div className={styles['movie-desc-container']}>
-            <h1 className={styles['movie-name']}>{original_title}</h1>
-            <p className={styles.desc}>User score {vote_average * 10}%</p>
-            <h2 className={styles.title}>Overview</h2>
-            <p className={styles.desc}>{overview}</p>
-            <h2 className={styles.title}>Genres</h2>
-            <p className={styles.desc}>
-              {genres && genres.map(genre => genre.name).join(' ')}
-            </p>
+          <div className={styles['additional-movie-container']}>
+            <h3>Additional information</h3>
+            <ul>
+              <li>
+                <NavLink
+                  to={{
+                    pathname: `${routes.movies}/${this.props.match.params.movieId}/cast`,
+                    state: {
+                      from: this.props.location,
+                    },
+                  }}
+                  className={styles['additional-link']}
+                  activeClassName={styles['additional-link--active']}
+                >
+                  Cast
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={{
+                    pathname: `/movies/${this.props.match.params.movieId}/reviews`,
+                    state: {
+                      from: this.props.location,
+                    },
+                  }}
+                  className={styles['additional-link']}
+                  activeClassName={styles['additional-link--active']}
+                >
+                  Reviews
+                </NavLink>
+              </li>
+            </ul>
           </div>
-        </div>
-        <div className={styles['additional-movie-container']}>
-          <h3>Additional information</h3>
-          <ul>
-            <li>
-              <NavLink
-                to={{
-                  pathname: `${routes.movies}/${this.props.match.params.movieId}/cast`,
-                  state: {
-                    from: this.props.location,
-                  },
-                }}
-                className={styles['additional-link']}
-                activeClassName={styles['additional-link--active']}
-              >
-                Cast
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={{
-                  pathname: `/movies/${this.props.match.params.movieId}/reviews`,
-                  state: {
-                    from: this.props.location,
-                  },
-                }}
-                className={styles['additional-link']}
-                activeClassName={styles['additional-link--active']}
-              >
-                Reviews
-              </NavLink>
-            </li>
-          </ul>
         </div>
       </>
     );

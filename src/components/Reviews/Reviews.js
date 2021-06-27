@@ -1,21 +1,27 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-// import styles from './Reviews.module.scss';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
 class Reviews extends Component {
   render() {
     const { reviews } = this.props;
     return (
-      <ul>
+      <Row xs={1} md={2}>
         {reviews.length > 0
           ? reviews.map(({ author, content, id }) => (
-              <li key={id}>
-                <h2>Author: {author}</h2>
-                <p>{content}</p>
-              </li>
+              <Col>
+                <Card key={id}>
+                  <Card.Body>
+                    <Card.Title>Author: {author}</Card.Title>
+                    <Card.Text>{content}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
             ))
           : 'We don`t have any reviews for this movie'}
-      </ul>
+      </Row>
     );
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 // import styles from './SearchForm.module.scss';
 
 class SearchForm extends Component {
@@ -28,15 +29,15 @@ class SearchForm extends Component {
   render() {
     const { searchReq } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
+      <Form inline onSubmit={this.handleSubmit}>
+        <Form.Control
           type="text"
           name="searchReq"
           value={searchReq}
           onChange={this.handleChange}
         />
-        <button type="submit">Search</button>
-      </form>
+        <Button type="submit">Search</Button>
+      </Form>
     );
   }
 }

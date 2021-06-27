@@ -17,7 +17,6 @@ const MovieDetailsPage = lazy(() =>
 );
 
 class App extends Component {
-  state = {};
   render() {
     return (
       <>
