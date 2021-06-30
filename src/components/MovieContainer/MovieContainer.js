@@ -7,25 +7,26 @@ import defaultImg from '../../img/default.jpg';
 
 class MovieContainer extends Component {
   handleGoBack = () => {
-    const { location, history } = this.props;
-    history.push(location?.state?.from || routes.movies);
+    const { history } = this.props;
+    history.push(history.location?.state?.from || routes.movies);
   };
   render() {
     const { poster_path, original_title, vote_average, overview, genres } =
       this.props.movie;
+    const { location } = this.props;
 
     return (
       <>
         <button
-          class="btn btn-warning"
+          className="btn btn-warning"
           type="button"
           onClick={this.handleGoBack}
         >
           Go back
         </button>
         <div className="card bg-light mb-3">
-          <div class="row no-gutters">
-            <div class="col-md-4">
+          <div className="row no-gutters">
+            <div className="col-md-4">
               <img
                 src={
                   poster_path
@@ -35,8 +36,8 @@ class MovieContainer extends Component {
                 alt={original_title}
               />
             </div>
-            <div class="col-md-8">
-              <div class="card-body">
+            <div className="col-md-8">
+              <div className="card-body">
                 <h1 className="card-title">{original_title}</h1>
                 <p className="card-text">User score {vote_average * 10}%</p>
                 <h2 className="card-title">Overview</h2>
@@ -56,7 +57,7 @@ class MovieContainer extends Component {
                   to={{
                     pathname: `${routes.movies}/${this.props.match.params.movieId}/cast`,
                     state: {
-                      from: this.props.location,
+                      from: location.state.from,
                     },
                   }}
                   className={styles['additional-link']}
@@ -68,9 +69,9 @@ class MovieContainer extends Component {
               <li>
                 <NavLink
                   to={{
-                    pathname: `/movies/${this.props.match.params.movieId}/reviews`,
+                    pathname: `${routes.movies}/${this.props.match.params.movieId}/reviews`,
                     state: {
-                      from: this.props.location,
+                      from: location.state.from,
                     },
                   }}
                   className={styles['additional-link']}
